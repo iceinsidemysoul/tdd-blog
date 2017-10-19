@@ -22,6 +22,16 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					@foreach ($thread->replies as $reply)
+
+						@include('threads.reply')
+		
+					@endforeach
+				</div>
+			</div>
 		</div>
 
 @endsection
