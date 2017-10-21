@@ -17,7 +17,7 @@ class CreateThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = factory('App\Thread')->make();
+        $this->thread = make('App\Thread');
     }
 
     public function test_an_unauthenticated_user_cannot_publish_threads()
@@ -29,18 +29,11 @@ class CreateThreadsTest extends TestCase
 
     public function test_an_authenticated_user_can_create_threads()
     {
-        // when we have a signed in user
-        $this->actingAs($user = factory('App\User')->create());
+        $this->signIn();
 
-        // when we hit the endpoint to create a new thread
-        // $thread = factory('App\Thread')->make();
         $this->post('/threads', $this->thread->toArray());
 
-        // then when we visited this thread page
         $this->get($this->thread->path())
-        // we should see the the new thread
         	->assertSee($this->thread->title);
-
-
     }
 }

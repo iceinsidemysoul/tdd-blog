@@ -15,20 +15,16 @@ class ThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = factory('App\Thread')->create();
+        $this->thread = create('App\Thread');
     }
 
     public function test_a_thread_has_replies()
     {
-        $this->thread = factory('App\Thread')->create();
-        // collection for has many relationships?
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
     }
 
     public function test_a_thread_has_creator()
     {
-    	$this->thread = factory('App\Thread')->create();
-    	// if it's belongs to relationships, do it like this
     	$this->assertInstanceOf('App\User', $this->thread->creator );
     }
 
