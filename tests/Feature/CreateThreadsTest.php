@@ -27,6 +27,13 @@ class CreateThreadsTest extends TestCase
         $this->post('/threads', $this->thread->toArray());
     }
 
+    public function test_an_unauth_user_cannot_see_create_thread_pages()
+    {
+        $this->withExceptionHandling()
+            ->get('/threads/create')
+            ->assertRedirect('/login');
+    }
+
     public function test_an_authenticated_user_can_create_threads()
     {
         $this->signIn();
